@@ -18,6 +18,10 @@ const products = [
       const li = document.createElement("li");
       li.innerHTML = `${product.name} - $${product.price} <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>`;
       productList.appendChild(li);
+		const btn = li.querySelector(".add-to-cart-btn");
+		    btn.addEventListener('click', (e) => {
+		      addToCart(btn.dataset.id);
+		    });
     });
   }
   let cartList = document.getElementById('cart-list');
@@ -48,7 +52,6 @@ const products = [
 
       cartList.innerHTML = '';
       renderCart();
-     
   }
   
   // Remove item from cart
@@ -76,14 +79,6 @@ const products = [
   renderProducts();
   renderCart();
   
-  let buttons = document.getElementsByClassName('add-to-cart-btn');
-  Array.from(buttons).forEach(btn=> {
-      btn.addEventListener('click',(e)=>{
-            console.log(btn.dataset.id); 
-          addToCart(btn.dataset.id);
-      })
-  })
-
   document.getElementById('clear-cart-btn').addEventListener('click',(e)=>{
       clearCart();
   })
